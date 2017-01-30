@@ -1,2 +1,2 @@
 # BlackHatPython
-This repository is the final location for tools I built from the book Black Hat Python
+I created this repository to store code from BlackHatPython.  The old repository 'Python\bhp' will be removed
