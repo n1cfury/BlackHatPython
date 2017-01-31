@@ -1,8 +1,7 @@
  #!/ usr/bin/python
 
-#Black Hat Python
-#SSH with Paramiko
-#pg 26
+#Black Hat Python SSH with Paramiko pg 26
+#TODO: ADD FUNCTIONS AND ARGUMENTS, AND DONT FORGET TO DEBUG.
 
 import threading, paramiko, subprocess
 
