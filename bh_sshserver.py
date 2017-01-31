@@ -1,14 +1,8 @@
- #!/ usr/bin/python
+#!/ usr/bin/python
 
-#Black Hat Python
-#SSH with Paramiko
-#pg 28
-#SSH Server.  Run this on the target box.
+#Black Hat Python: SSH Server w/ Paramiko pg 28
 
-import socket
-import threading
-import paramiko
-import sys
+import socket, threading, paramiko, sys
 
 #         MAKE SURE YOU HAVE THE SSH KEY FROM THE PARAMIKO DEMO FILES (http://www.paramiko.org)
 host_key = paramiko.RSAKey(filename = 'test_rsa.key')
