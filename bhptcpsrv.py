@@ -1,23 +1,18 @@
  #!/ usr/bin/python
 
-#Blackhat Python
-#TCP Server
-#Page 12
+#Blackhat Python; TCP Server pg 12
+#TODO:  ADD SOME FUNCTIONS IN TO MAKE THIS WORK BETTER
 
-import socket
-import threading
+import socket, threading
 
 bind_ip = "0.0.0.0"
 bind_port = 9999
 
 server = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-
 server.bind((bind_ip, bind_port))
-
 server.listen(5)
 
 print "[*] Listening on %s:%d" % (bind_ip, bind_port)
-
 
 # client handling thread
 
@@ -27,7 +22,6 @@ def handle_client(client_socket):
 
     client_socket.send("ACK!")
     client_socket.close()
-
 
 while True:
     client, addr = server.accept()
