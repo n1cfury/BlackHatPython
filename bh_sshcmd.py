@@ -4,10 +4,14 @@
 
 import threading, paramiko, subprocess
 
+host = sys.argv[1]
+user = sys.argv[2]
+passwd = sys.argv[3]
+command = sys.argv[4]
 
 def banner():
-    print "############   n1cFury- NetCat tool   #################"
-    print "############  courtesy of Black Hat Python  ###########"
+	print ""
+    print "############   n1cFury- SSH Client  #################"
     print ""
 
 def usage():
@@ -23,15 +27,17 @@ def ssh_command(ip, user, passwd, command):
 		ssh_session.exec_command(command)
 		print ssh_session.recv(1024) 	#read banner
 	return
-ssh_command('192.168.1.59', 'justin', 'lovesthepython','id')
+#ssh_command('192.168.1.59', 'justin', 'lovesthepython','id')			#was manually configured before
 
 def main():
+	banner()
 	if sys.argv == 5:
-		banner()
 		ssh_command(ip, user, passwd, command)
 	else:
 		print usage
 
-
 if __name__ == "__main__":
 	main()
+
+
+
