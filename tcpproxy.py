@@ -107,8 +107,8 @@ def main():
 	local_port = int(sys.argv[2])
 
 	#setup remote target
-	remote_host
-	remote_port
+	remote_host = sys.argv[3]
+	remote_port = sys.argv[4]
 
 	#this tells our proxy to connect and receive data
 	#before sending to the remote host 
