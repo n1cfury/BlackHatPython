@@ -1,6 +1,5 @@
 #Black Hat Python, Sniffer, IP Header Decoder
 
-
 import socket, os, struct
 from ctypes import *
 
