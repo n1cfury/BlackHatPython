@@ -1,15 +1,17 @@
  #!/ usr/bin/python
 
-#Black Hat Python SSH with Paramiko pg 26
 #TODO: ADD FUNCTIONS AND ARGUMENTS, AND DONT FORGET TO DEBUG.
 
 import threading, paramiko, subprocess
 
-def ssh_command(ip, user, passwd, command):
+def banner():
+	print "#######  SSH with Paramiko pg 26   ########"
+	print ""
+def ssh_cmd(ip, user, passwd, command):
 	client = paramiko.SSHClient()
 	#client.load_host_keys('/home/justin/.ssh/known_hosts')
 	client.set_missing_host_key_policy(paramoko.AutoAddPolicy())
-	client.connect(ip, usernmae= user, password= passwd)
+	client.connect(ip, username= user, password= passwd)
 	ssh_session = client.get_transport().open_session()
 	if ssh_session.active:
 		ssh_session.exec_command(command)
@@ -23,7 +25,14 @@ def ssh_command(ip, user, passwd, command):
 				ssh_session.send(str(e))
 		client.close()
 	return
-ssh_command('192.168.100.131', 'justin', 'lovesthepython','id')
+ssh_cmd('192.168.100.131', 'justin', 'lovesthepython','id')			
 
+def main():
+	#Add if/then for arguments
+	banner():
+	ssh_cmd()
+
+if __name__ = "__main__":
+	main()
 
 #End of Program
