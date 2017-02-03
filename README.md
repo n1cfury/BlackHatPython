@@ -1,2 +1,2 @@
 # BlackHatPython
-I created this repository to store code from BlackHatPython.  The old repository 'Python\bhp' will be removed
+I created this repository to store my updated code from BlackHatPython.  Once I'm done testing my code the 'bhp' prefix will be removed.  Comments will include brief details. 
