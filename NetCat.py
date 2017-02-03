@@ -7,7 +7,7 @@ command             = False
 upload              = False
 execute             = ""
 target              = ""
-upload_destination  = ""
+upload_dest         = ""
 port                = 0
 
 def banner():
@@ -41,7 +41,7 @@ def client_handler(client_socket):
     global execute
     global command
 
-    if len(upload_destination):             #check for upload
+    if len(upload_dest):             #check for upload
         file_buffer = ""                    #read in all of the bytes and write to our destination
         while True:                         #keep reading data until none is available
             data = client_socket.recv(1024)
@@ -50,12 +50,12 @@ def client_handler(client_socket):
             else:
                 file_buffer += data         #now we take these bytes and try to write them out
         try:                                       
-            file_descriptor = open(upload_destination,"wb")
+            file_descriptor = open(upload_dest,"wb")
             file_descriptor.write(file_buffer)
             file_descriptor.close()
-            client_socket.send("Woohoo! File saved to %s\r\n" % upload_destination)
+            client_socket.send("Woohoo! File saved to %s\r\n" % upload_dest)
         except:
-            client_socket.send("You suck! Your file didn't copy to %s\r\n" % upload_destination)
+            client_socket.send("You suck! Your file didn't copy to %s\r\n" % upload_dest)
 
     if len(execute):                          #click for command execution
         output = run_command(execute)        #run the command
@@ -120,7 +120,7 @@ def main():
     global port
     global execute
     global command
-    global upload_destination
+    global upload_dest
     global target
 
     if not len(sys.argv[1:]):
@@ -142,7 +142,7 @@ def main():
         elif o in ("-c", "--commandshell"):
             command = True
         elif o in ("-u", "--upload"):
-            upload_destination = a
+            upload_dest = a
         elif o in ("-t", "--target"):
             target = a
         elif o in ("-p", "--port"):
