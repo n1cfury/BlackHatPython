@@ -4,66 +4,58 @@
 
 import sys, socket, threading
 
-def server_loop(local_host, local_port, remote_host, remote_port, receive_first):
+def usage():
+	print " ./proxy.py [L_host] [L_port] [R_host] [R_port] [rcv_1st]"
+	print "e.g. ./proxy.py 127.0.0.1 9000 10.12.132.1 9000 True"
+
+def srv_loop(L_host, L_port, R_host, R_port, rcv_1st):
 	server = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 	try:
-		server.bind((local_host,local_port))
+		server.bind((L_host,L_port))
 	except:
-		print "[!!] Failed to listed on %s:%d" % (local_host, local_port)
+		print "[!!] Failed to listed on %s:%d" % (L_host, L_port)
 		print "[!!] Check for other listening sockets or correct permissions."
 		sys.exit(0)
-		print "[*] Listening on %s:%d % (local_host, local_port)"
+		print "[*] Listening on %s:%d % (L_host, L_port)"
 		server.listen(5)
 		while True: 
-			client_socket, addr= server.accept()		#print local connection info
+			c_socket, addr= server.accept()		#print local connection info
 			print "[==>] Received incoming connection from %d:%s % (addr[0], addr[1]))"
-			#start a thread to talk to the remote local_host
-			proxy_thread = threading.Thread(target=proxy_handler, args= (clitnet_socket,remote_host, remote_port, receive_first_))
+			proxy_thread = threading.Thread(target=proxy_handler, args= (c_socket,R_host, R_port, rcv_1st_))
 			proxy_thread.start()
 
-def proxy_handler(client_socket, remote_host, remote_port, receive_first):
-	#connect to the remote host
-	remote_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-	remote_socket.connect((remote_host, remote_port))
-	if receive_first:						#receive data from the remote end if necessary
-		remove_buffer = receive_frimom(remote_socket)
-		hexdump(remote_buffer)
-		#send it to our response proxy_handler
-		remote_buffer = response__handler(remote_buffer)
-		#if we have data to send to our local client, send it!
-		if len(remote_buffer):
-			print "[<==] Sending %d bytes to Local_host." % len(remote_buffer)
-			client_socket.send(remote_buffer)
+def proxy_handler(c_socket, R_host, R_port, rcv_1st):			#connect to the remote host
+	R_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+	R_socket.connect((R_host, R_port))
+	if rcv_1st:																#receive data from the remote end if necessary
+		remove_buffer = rcv_from(R_socket)
+		hexdump(R_buffer)
+		R_buffer = response_handler(R_buffer)							#send it to our response proxy_handler
+		if len(R_buffer):														#Sends data to the local client if available
+			print "[<==] Sending %d bytes to L_host." % len(R_buffer)
+			c_socket.send(R_buffer)
 	while True:
-
-		#read from local host
-		local_buffer = receive_from(client_socket)
+		local_buffer = rcv_from(c_socket)									#read from local host
 		if len(local_buffer):
-			print "[==>] Received %d bytes from local_host." % len(local_buffer)
+			print "[==>] Received %d bytes from L_host." % len(local_buffer)
 			hexdump(local_buffer)
-			#send it to our request handler
-			local_buffer = request_hadnler(local_buffer)
-			#Send it to our request handler
-			local_buffer = request_hadnler
-			#send off the data to the remote host
-			remote_socket.send(local_buffer)
+			local_buffer = req_hadnler(local_buffer)							#send it to our request handler
+			local_buffer = req_handler  										#Send it to our request handler
+			R_socket.send(local_buffer)										#send off the data to the remote host
 			print "[==>] Sent to remote."
-			#receive back the response
-			remote_buffer = receive_from(remote_socket)
-			if len(remote_buffer):
-				print "[<==] Received %d bytes from remote." % len(remote_buffer)
-				hexdump(remote_buffer)
-				#send the response to the local socket
-				client_socket.send(remote_buffer)
-				print "[<==] Sent to local_host."
-			#if no more data on either side, close the connection
-			if not len(local_buffer) or not len(remote_buffer):
-				client_socket.close()
-				remote_socket.close()
+			R_buffer = rcv_from(R_socket)								#receive back the response
+			if len(R_buffer):
+				print "[<==] Received %d bytes from remote." % len(R_buffer)
+				hexdump(R_buffer)
+				c_socket.send(R_buffer)									#send the response to the local socket
+				print "[<==] Sent to L_host."
+			if not len(local_buffer) or not len(R_buffer):						#if no more data on either side, close the connection
+				c_socket.close()
+				R_socket.close()
 				print "[*] No more data.  Closing connections."
 				break
 
-def hexdump(src, length=16):	#hex dumping function from http://code.activestate.com/recipes/142812-hex-dumper/
+def hexdump(src, length=16):			#hex dumping function from http://goo.gl/3LMHPj
 	result = []
 	digits = 4 if isinstance(src, unicode) else 2
 	for i in xrange(o, len(src), length):
@@ -73,15 +65,11 @@ def hexdump(src, length=16):	#hex dumping function from http://code.activestate.
 		result.append(b"%0*4X %-*s %s" (i, length*(digits + 1), hexa, text) )
 	print b'\n'.join(result)
 
-def receive_from(connection):
+def rcv_from(connection):
 	buffer = ""
-	#we set a 2 second timeout; depending on your target, this may need to be adjusted
-	connection.settimeout(2)
+	connection.settimeout(2)				#Two second timeout.  Adjust accordingly
 	try:
-		#keep reading into the buffer until
-		#there's no more data
-		#or we time out
-		while True:
+		while True:							#keep reading into the buffer until there's no more data or it times out.
 			data = connection.recv(4096)
 			if not data:
 				break
@@ -90,37 +78,36 @@ def receive_from(connection):
 	pass
 	return buffer
 
-def request_handler(buffer):   		#modify any requests destined for the next remote host
+def req_handler(buffer):   			#modify packets destined for the next remote host
 	return buffer
 
-def response_handler(buffer):		#modify any responses destined for the local host
+def response_handler(buffer):			#modify packets destined for the local host
 	return buffer
 
 def main():
-	#no fancy command-line parsing here
-	if len(sys.argv[1:]) != 5:
-		print "Usage: ./proxy.py [local_host] [local_port] [remote_host] [remote_port] [receive_first]"
-		print "Example ./proxy.py 127.0.0.1 9000 10.12.132.1 9000 True"
+	if len(sys.argv[1:]) != 5:			#no fancy command-line parsing here
+		usage()
 		sys.exit(0)
-	#setup local listening parameters
-	local_host = sys.argv[1]
-	local_port = int(sys.argv[2])
-
-	#setup remote target
-	remote_host = sys.argv[3]
-	remote_port = sys.argv[4]
-
-	#this tells our proxy to connect and receive data
-	#before sending to the remote host 
-	receive_first = sys.argv[5]
-
-	if "True" in receive_first
-		receive_first = True
+	L_host = sys.argv[1]			#setup local listening parameters
+	L_port = int(sys.argv[2])
+	R_host = sys.argv[3]			#setup remote target
+	R_port = sys.argv[4]
+	rcv_1st = sys.argv[5]			#this tells our proxy to connect and receive data before sending to the remote host
+	if "True" in rcv_1st
+		rcv_1st = True
 	else:
-		receive_first = False
+		rcv_1st = False
+	srv_loop(L_host, L_port, R_host, R_port, rcv_1st)		#now spin up our listening socket
 
-	#now spin up our listening socket
-	server_loop(local_host, local_port, remote_host, remote_port, receive_first)
-main()
+if __name__ = "__main__":
+	main()  
 
-#End of program.  
+
+
+
+
+
+
+
+
+
