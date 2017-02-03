@@ -9,7 +9,7 @@ def banner():
 	print "##### UDP Client  #######"					#Blackhat Python UDP Client, pg 11
 	print ""
 
-def worker(target_host, target_port):
+def udpclient(target_host, target_port):
 	client = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
 	client.sendto("AAABBBCCC", (target_host, target_port))
 	data, addr = client.recvfrom(4096)
@@ -18,7 +18,7 @@ def worker(target_host, target_port):
 def main():
 	if sys.argv == 3:
 		banner()
-		worker(target_host, target_port)
+		udpclient(target_host, target_port)
 	else: 
 		print usage
 
