@@ -1,6 +1,6 @@
  #!/ usr/bin/python
 
-#TODO:  Variables defined as arguments and functions added.  Could be similar to the Banner Grabber you wrote.
+#TODO:  Variables defined as arguments and functions added.  Very similar to the banner grabber"
 
 import socket, sys
 
