@@ -1,4 +1,4 @@
- #!/ usr/bin/python
+#!/ usr/bin/python
 import socket, sys
 
 usage = "updcli.py target_host target_port"
