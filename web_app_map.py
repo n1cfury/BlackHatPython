@@ -1,5 +1,6 @@
+def banner():
+	print "#pg 63. web app mapper"
 
-#pg 63. web app mapper
 
 import Queue, threading, os, urllib2
 
