@@ -9,10 +9,10 @@ upload_dest         = ""
 port                = 0
 
 def banner():
-    print "############   NetCat tool   #################"
+    print "############   NetCat p19  #################"    
 
 def usage():
-    print "         NetCat.py -t target_host -p port                   "
+    print "     python NetCat.py -t target_host -p port                "
     print "-l   --Listen on [host]:[port] for incoming connections     "
     print "-e   --execute = file_to_run  -execute a file               "
     print "-c   --command              -initialize a command shell     "
