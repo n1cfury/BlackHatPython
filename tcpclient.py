@@ -1,14 +1,13 @@
  #!/ usr/bin/python
-
-#TODO:  Variables defined as arguments and functions added.  Very similar to the banner grabber"
-
 import socket, sys
 
-def banner():
-	print "#### Black Hat Python TCP Client pg 10"
 usage = "bhptcpcli.py <target host> <port number>"
 target_host = sys.argv[1]
 target_port = sys.argv[2]
+
+def banner():
+	print "#### Black Hat Python TCP Client p 10"
+	print "Functions were added to improve the tool"
 
 def tcptool(target_host, target_port):
 	client = socket.socket(socket.AF_INET, socket.SOCK_STREAM)         	#Create a socket for the target host, port
