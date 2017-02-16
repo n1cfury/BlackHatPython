@@ -1,8 +1,8 @@
  #!/ usr/bin/python
-
-#Black Hat Python; TCP Proxy (p 21)
-
 import sys, socket, threading
+
+def banner():
+	print "###  TCP Proxy p21  ###"
 
 def usage():
 	print " ./proxy.py [L_host] [L_port] [R_host] [R_port] [rcv_1st]"
@@ -100,14 +100,4 @@ def main():
 	srv_loop(L_host, L_port, R_host, R_port, rcv_1st)		#now spin up our listening socket
 
 if __name__ = "__main__":
-	main()  
-
-
-
-
-
-
-
-
-
-
+	main()
