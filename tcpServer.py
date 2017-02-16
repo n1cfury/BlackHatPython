@@ -1,13 +1,11 @@
  #!/ usr/bin/python
-
-#Blackhat Python; TCP Server pg 12
-#TODO:  ADD SOME FUNCTIONS IN TO MAKE THIS WORK BETTER
-
 import socket, threading, sys
+
+def banner():						#TODO:  Add functions.
+	print "##### TCP Server p12 #####"
 
 bind_ip = sys.argv[1]
 bind_port = sys.argv[2]
-
 server = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 server.bind((bind_ip, bind_port))
 server.listen(5)
