@@ -1,7 +1,5 @@
 #!/usr/bin/env python
 
-
-
 import os, socket, sys 		#Added sys module to allow arguments.
 
 def banner():
