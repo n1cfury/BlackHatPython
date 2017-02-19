@@ -3,7 +3,8 @@ import volatility.commands as commands, volatility.addrspace as addrspace
 import volatility.plugins.taskmods as taskmods
 
 def banner():
-	print "###   Code inject p158   ###"
+	print "[***]   Code inject p158   [***]"
+	print ""
 
 #setup code
 equals_button = 0x01005D51
@@ -68,6 +69,3 @@ for process in p.calculate():
 				df.write(tram)
 				fd.close()
 				print "[*] Done injecting code."
-
-
-#continue page 159
