@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 import sys,socket,getopt,threading,subprocess
-listen              = False         #Defining global variables
+listen              = False         
 command             = False
 upload              = False
 execute             = ""
@@ -9,7 +9,8 @@ upload_dest         = ""
 port                = 0
 
 def banner():
-    print "############   NetCat p19  #################"    
+    print "   [***]   NetCat p19   [***]   "
+    print ""
 
 def usage():
     print "     python NetCat.py -t target_host -p port                "
