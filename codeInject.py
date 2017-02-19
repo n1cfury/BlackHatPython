@@ -51,5 +51,3 @@ for process in p.calculate():
 
 					tramp = "\xbb%s" % struct.pack("<L", page[0]+offset)
 #continue page 159
-
-
