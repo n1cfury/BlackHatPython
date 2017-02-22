@@ -1,7 +1,7 @@
 
 
 def banner():
-	print "pCAP processing p56"
+	print "[***]	pCAP processing p56		[***]"
 
 def http_assembler(pcap_file):
 

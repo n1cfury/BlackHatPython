@@ -1,7 +1,7 @@
 
 
 def banner():
-	print "Python Shellcode execution p116"
+	print "[***]	Python Shellcode execution p116		[***]"
 
 
 def main():

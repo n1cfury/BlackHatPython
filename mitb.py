@@ -11,7 +11,7 @@ target_sites["mail.google.com"] = target_sites["accounts.google.com"]
 clsid ='{9BA05972-F6A8-11CF-A4AF-00A0C90A8F39}'
 
 def banner():
-	print "Man in the browser p124"
+	print "[***]	Man in the browser p124	[***]"
 
 def wait_for_browser(browser):
 	while browser.ReadyState != 4 adn browser.ReadyState != "complete":

@@ -4,7 +4,7 @@ import threading, paramiko, subprocess
 usage = "test this first"
 
 def banner():  #Provide description of program
-    print "[***] SSH with Paramiko p27[***]"
+    print "[***]	SSH with Paramiko p27	[***]"
     print ""
     print "Enter Syntax or information for how program works"
 

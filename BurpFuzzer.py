@@ -3,7 +3,7 @@ from burp import IBurpExtender, IntruderPayloadGeneratorFactory, IIntruderPayloa
 from java.util import List, ArrayList
 
 def banner():
-print "###   Burp Fuzzer p79   ###"
+print "[***]	Burp Fuzzer p79		[***]"
 
 class BurpExtender(IBurpExtender, IIntruderPayloadGeneratorFactory):
 	def registerExtenterCallbacks(self, callbacks):

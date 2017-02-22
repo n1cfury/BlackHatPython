@@ -8,7 +8,7 @@ from java.net import URL
 bing_api_key = ""
 
 def banner():
-	print "  Bing for Burp p88  "
+	print "[***]	Bing for Burp p88		[***]"
 	print ""
 
 class BurpExtender(IBurpExtender, IContextMenuFactory):

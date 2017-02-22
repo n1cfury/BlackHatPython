@@ -9,7 +9,7 @@ conf.iface = interface		#set our interface
 conf.verb = 0				#Set our interface
 
 def banner():
-	print "###   ARP cache poison p52   ###"
+	print "[***]	ARP cache poison p52	[***]"
 
 def restore_target(gateway_ip, gateway_mac, target_ip, target_mac):
 	print "[*] Restoring target... "

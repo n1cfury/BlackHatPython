@@ -8,7 +8,7 @@ server = sys.argv[1]
 ssh_port = int(sys.argv[2])
 
 def banner():
-	print "#  SSH Server p28"
+	print "[***]	SSH Server p28		[***]"
 
 class Server(paramiko.ServerInterface):
 	def _init_(self):

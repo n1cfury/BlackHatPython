@@ -7,7 +7,7 @@ from datetime import datetime
 from HTMLParser import HTMLParser
 
 def banner():
-	print "Burp Wordlist p94"
+	print "[***]	Burp Wordlist p94	[***]"
 
 class TagStripper(HTMLParser):
 	def __init__(self):

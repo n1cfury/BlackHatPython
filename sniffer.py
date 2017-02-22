@@ -2,7 +2,7 @@
 import os, socket, sys 		#Added sys module to allow arguments.
 
 def banner():
-	print "#######   BlackHat Python p 37; sniffer  #######"
+	print "[***]	BlackHat Python p 37; sniffer	[***]"
 
 host = "Target IP"  		#Host to listen on. Consider adding an argument to enter an IP
 

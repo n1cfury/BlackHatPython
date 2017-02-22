@@ -6,7 +6,7 @@ target_host = sys.argv[1]
 target_port = sys.argv[2]
 
 def banner():
-	print "#### Black Hat Python TCP Client p 10"
+	print "[***]	TCP Client p10		[***]"
 	print "Functions were added to improve the tool"
 
 def tcptool(target_host, target_port):

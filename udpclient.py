@@ -6,7 +6,7 @@ target_host = sys.argv[1]
 target_port = sys.argv[2]
 
 def banner():
-	print "##### UDP Client p11 #######"					#Blackhat Python UDP Client, pg 11
+	print "[***]	UDP Client p11		[***]"					#Blackhat Python UDP Client, pg 11
 	print "Functions were added"
 
 def udpclient(target_host, target_port):

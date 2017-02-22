@@ -2,7 +2,7 @@
 import socket, threading, sys
 
 def banner():						#TODO:  Add functions.
-	print "##### TCP Server p12 #####"
+	print "[***]	TCP Server p12		[***]"
 
 bind_ip = sys.argv[1]
 bind_port = sys.argv[2]

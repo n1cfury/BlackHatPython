@@ -2,7 +2,7 @@
 
 
 def banner():
-	print "sandbox detection p118"
+	print "[***]	sandbox detection p118	[***]"
 
 
 class LASTINPUTINFO():
