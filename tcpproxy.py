@@ -2,7 +2,7 @@
 import sys, socket, threading
 
 def banner():
-	print "###  TCP Proxy p21  ###"
+	print "[***]	  TCP Proxy p21		[***]"
 
 def usage():
 	print " ./proxy.py [L_host] [L_port] [R_host] [R_port] [rcv_1st]"
