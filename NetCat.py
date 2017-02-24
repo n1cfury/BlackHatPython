@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 import sys,socket,getopt,threading,subprocess
-listen              = False         
+listen              = False
 command             = False
 upload              = False
 execute             = ""
@@ -9,7 +9,7 @@ upload_dest         = ""
 port                = 0
 
 def banner():
-    print "   [***]   NetCat p19   [***]   "
+    print "[***]    NetCat p19      [***]"
     print ""
 
 def usage():
@@ -45,7 +45,7 @@ def client_handler(client_socket):
                 break
             else:
                 file_buffer += data         #now we take these bytes and try to write them out
-        try:                                       
+        try:
             file_descriptor = open(upload_dest,"wb")
             file_descriptor.write(file_buffer)
             file_descriptor.close()
@@ -59,7 +59,7 @@ def client_handler(client_socket):
         while True:
             prompt = "<BHPNet:#> "
             client_socket.send(prompt)
-            cmd_buffer = ""                                   #now we receive until we ses a linefeed(enter key)          
+            cmd_buffer = ""                                   #now we receive until we ses a linefeed(enter key)
             while "\n" not in cmd_buffer:
                 cmd_buffer += client_socket.recv(1024)
             response = run_command(cmd_buffer)                 #send back the command output
@@ -93,7 +93,7 @@ def client_sender(buffer):
                 response+= data
                 if recv_len < 4096:
                     break
-            print response,    
+            print response,
             buffer = raw_input("")                             #wait for more input
             buffer += "\n"
             client.send(buffer)                               #send it off
@@ -112,7 +112,7 @@ def main():
     if not len(sys.argv[1:]):
         usage()
     try:                            #reads command line options
-        opts, args = getopt.getopt(sys.argv[1:], "hle:t:p:cu:",     
+        opts, args = getopt.getopt(sys.argv[1:], "hle:t:p:cu:",
                 ["help","listen","execute","target","port","command","upload"])
     except getopt.GetoptError as err:
         print str(err)
