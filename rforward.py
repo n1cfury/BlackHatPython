@@ -21,7 +21,7 @@ def handler(chan, host, port):
 		verbose('Forwarding reqeust to %s:%d failed: %r' (host, port, e))
 		return
 	verbose('Connected! Tunnel open %r -> %r -> %r ' %(chan.origin_addr, chan.getpeername(), host, port))
-	whiel True:
+	while True:
 		r, w, x = select.select([sock, chan], [], [])
 		if sock in r:
 			data=sock.recv(1024)
